@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Warm orange accent */
+  --accent: #FF8A3D;
+  --accent-hover: #ff9d5c;
+  --accent-glow: rgba(255, 138, 61, 0.4);
+  --mint: #34D399;
+  --mint-glow: rgba(52, 211, 153, 0.35);
+}
+
+/* Dark theme (default) — Modern navy gradient */
+:root,
+.dark {
+  --bg-gradient-start: #0c1222;
+  --bg-gradient-end: #152238;
+  --card-bg: rgba(21, 34, 56, 0.5);
+  --card-border: rgba(148, 163, 184, 0.08);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 24px var(--accent-glow);
+}
+
+/* Light theme override */
+.light {
+  --bg-gradient-start: #f8fafc;
+  --bg-gradient-end: #e2e8f0;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(148, 163, 184, 0.15);
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 24px var(--accent-glow);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  color: var(--text-primary);
+  transition: background 0.5s ease, color 0.3s ease;
+}
+
+/* Glassmorphism base */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Section spacing — 80–120px vertical, 64–96px gap */
+.section-padding {
+  padding: 5rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 7rem 3rem;
+  }
+}

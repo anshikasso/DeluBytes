@@ -1,0 +1,8 @@
+{
+  "Data Scientist": ["python", "sql", "machine learning", "pandas", "numpy", "scikit-learn", "tensorflow", "pytorch", "data analysis", "statistics", "jupyter"],
+  "Frontend Developer": ["javascript", "react", "html", "css", "typescript", "vue", "angular", "responsive design", "git"],
+  "Backend Developer": ["python", "node.js", "java", "sql", "mongodb", "postgresql", "rest apis", "docker", "git"],
+  "Full Stack Developer": ["javascript", "react", "python", "node.js", "sql", "mongodb", "rest apis", "html", "css", "git"],
+  "Cloud Engineer": ["aws", "azure", "docker", "kubernetes", "terraform", "linux", "python", "git"],
+  "Machine Learning Engineer": ["python", "tensorflow", "pytorch", "scikit-learn", "machine learning", "nlp", "computer vision", "git"]
+}
