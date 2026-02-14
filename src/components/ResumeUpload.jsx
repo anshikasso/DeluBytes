@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, FileText, Loader2, AlertCircle, Sparkles } from 'lucide-react';
+import { Upload, FileText, Loader2, AlertCircle } from 'lucide-react';
 import { analyzeProfile } from '../api/careerApi';
 
 export default function ResumeUpload({ onUploadComplete, githubUrl, linkedinUrl, role }) {
@@ -24,16 +24,12 @@ export default function ResumeUpload({ onUploadComplete, githubUrl, linkedinUrl,
     e.preventDefault();
     setIsDragging(false);
     const file = e.dataTransfer.files[0];
-    if (file && file.type === 'application/pdf') {
-      processUpload(file);
-    }
+    if (file) processUpload(file);
   }, []);
 
   const handleFileSelect = (e) => {
     const file = e.target.files?.[0];
-    if (file && (file.type === 'application/pdf' || file.name.endsWith('.pdf'))) {
-      processUpload(file);
-    }
+    if (file) processUpload(file);
   };
 
   const processUpload = async (file) => {
@@ -77,13 +73,13 @@ export default function ResumeUpload({ onUploadComplete, githubUrl, linkedinUrl,
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-full"
+      className="w-full max-w-[720px]"
     >
       {error && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-6 flex items-center gap-2 px-5 py-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-400"
+          className="mb-6 flex items-center gap-2 px-5 py-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-600"
         >
           <AlertCircle className="w-5 h-5 flex-shrink-0" />
           <span className="text-sm font-medium">{error}</span>
@@ -94,18 +90,14 @@ export default function ResumeUpload({ onUploadComplete, githubUrl, linkedinUrl,
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => !isUploading && document.getElementById('resume-input')?.click()}
-        className={`
-          relative rounded-2xl border-2 border-dashed p-12 sm:p-16
-          glass-card cursor-pointer transition-all duration-300
-          ${isDragging ? 'border-[var(--accent)] scale-[1.02] shadow-[0_0_32px_var(--accent-glow)]' : 'border-[var(--card-border)]'}
-        `}
-        whileHover={!isUploading ? { scale: 1.01, boxShadow: '0 0 24px var(--accent-glow)' } : {}}
-        whileTap={!isUploading ? { scale: 0.99 } : {}}
+        className={`relative rounded-[24px] card-lg cursor-pointer transition-all duration-300 glass-card ${isDragging ? 'scale-[1.02] shadow-[0_12px_48px_rgba(249,115,22,0.18)] ring-2 ring-[var(--accent)]/30' : ''}`}
+        whileHover={!isUploading ? { y: -4, boxShadow: '0 18px 60px rgba(0,0,0,0.12)' } : {}}
+        whileTap={!isUploading ? { scale: 0.995 } : {}}
       >
         <input
           id="resume-input"
           type="file"
-          accept=".pdf,application/pdf"
+          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           onChange={handleFileSelect}
           className="hidden"
         />
@@ -120,27 +112,20 @@ export default function ResumeUpload({ onUploadComplete, githubUrl, linkedinUrl,
               className="flex flex-col items-center gap-8 text-center"
             >
               <motion.div
-                className="w-20 h-20 rounded-2xl bg-[var(--accent)]/20 flex items-center justify-center flex-shrink-0"
-                whileHover={{ rotate: 5, scale: 1.05 }}
+                className="w-[72px] h-[72px] rounded-2xl bg-[var(--hero-icon-bg,#F5D2B8)] flex items-center justify-center flex-shrink-0"
+                animate={{ scale: [1, 1.02, 1] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <Upload className="w-10 h-10 text-[var(--accent)]" strokeWidth={2} />
+                <Upload className="w-9 h-9 text-[var(--hero-accent,#F97316)]" strokeWidth={2} />
               </motion.div>
-              <div className="space-y-2">
-                <p className="text-[var(--text-primary)] font-semibold text-xl">
-                  Drag & drop your resume here
-                </p>
-                <p className="text-[var(--text-secondary)] text-base">
-                  or click to browse • PDF only
-                </p>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-[var(--accent)]">
-                <Sparkles className="w-4 h-4" />
-                <span>AI analyzes skills instantly</span>
+              <div className="stack">
+                <p className="text-[var(--hero-text,#1E293B)] font-semibold text-lg">Drop your resume here</p>
+                <p className="helper">PDF or Word (DOC, DOCX)</p>
               </div>
               <motion.button
                 onClick={(e) => { e.stopPropagation(); document.getElementById('resume-input')?.click(); }}
-                className="px-8 py-3.5 rounded-xl bg-[var(--accent)] text-white font-medium hover:bg-[var(--accent-hover)] transition-colors"
-                whileHover={{ scale: 1.03 }}
+                className="btn btn-accent"
+                whileHover={{ y: -2, boxShadow: '0 8px 30px rgba(249,115,22,0.18)' }}
                 whileTap={{ scale: 0.98 }}
               >
                 Upload from Desktop
@@ -157,16 +142,14 @@ export default function ResumeUpload({ onUploadComplete, githubUrl, linkedinUrl,
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                className="w-16 h-16 rounded-full border-4 border-[var(--accent)]/30 border-t-[var(--accent)]"
+                className="w-16 h-16 rounded-full border-4 border-[#F97316]/30 border-t-[#F97316]"
               />
-              <Loader2 className="w-10 h-10 text-[var(--accent)] animate-spin -mt-20" />
-              <div className="flex items-center gap-2">
+              <Loader2 className="w-10 h-10 text-[#F97316] animate-spin -mt-20" />
+              <div className="row">
                 <FileText className="w-5 h-5 text-[var(--mint)]" />
-                <p className="text-[var(--text-primary)] font-medium truncate max-w-[200px]">
-                  {fileName}
-                </p>
+                <p className="text-[var(--text-primary)] font-medium truncate max-w-[280px]">{fileName}</p>
               </div>
-              <div className="w-full max-w-xs h-2 bg-white/10 rounded-full overflow-hidden">
+              <div className="w-full max-w-sm h-2 bg-[var(--hero-input-bg,#F3EDE7)] rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-[var(--mint)] rounded-full"
                   initial={{ width: 0 }}
@@ -174,9 +157,7 @@ export default function ResumeUpload({ onUploadComplete, githubUrl, linkedinUrl,
                   transition={{ duration: 0.3 }}
                 />
               </div>
-              <p className="text-[var(--text-secondary)] text-sm">
-                AI is analyzing your resume...
-              </p>
+              <p className="helper">AI is analyzing your resume...</p>
             </motion.div>
           )}
         </AnimatePresence>

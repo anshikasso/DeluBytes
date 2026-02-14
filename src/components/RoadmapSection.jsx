@@ -67,7 +67,7 @@ export default function RoadmapSection({ isVisible, roadmap }) {
       transition={{ duration: 0.6 }}
       className="section-padding"
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="container mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ export default function RoadmapSection({ isVisible, roadmap }) {
             Your personalized learning path — a journey to bridge skill gaps
           </p>
 
-          <div className="inline-block p-8 rounded-2xl glass-card">
+          <div className="inline-block card-pad-md rounded-2xl glass-card">
             <ProgressRing
               percent={percent}
               daysElapsed={Math.min(completedCount * 3, 30)}

@@ -32,7 +32,7 @@ export default function SkillsSection({ isVisible, skillsData }) {
       transition={{ duration: 0.6 }}
       className="section-padding"
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function SkillsSection({ isVisible, skillsData }) {
           </p>
         </motion.div>
 
-        <div className="space-y-8 sm:space-y-10">
+        <div className="skills-grid">
           {Object.entries(data).map(([category, skills], catIndex) => {
             const Icon = CATEGORY_ICONS[category] || Brain;
             return (
@@ -56,7 +56,7 @@ export default function SkillsSection({ isVisible, skillsData }) {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 * catIndex }}
-                className="rounded-2xl p-6 sm:p-8 glass-card"
+                className="rounded-2xl p-6 sm:p-8 glass-card card-lg"
               >
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-[var(--card-border)]">
                   <div className="w-10 h-10 rounded-xl bg-[var(--accent)]/20 flex items-center justify-center">

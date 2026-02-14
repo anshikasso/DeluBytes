@@ -7,9 +7,9 @@ export function ThemeProvider({ children }) {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
       if (saved) return saved === 'dark';
-      return true;
+      return false;
     }
-    return true;
+    return false;
   });
 
   useEffect(() => {

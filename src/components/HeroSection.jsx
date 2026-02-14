@@ -20,17 +20,17 @@ export default function HeroSection({ onResumeUploaded }) {
   };
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-28 pb-24 sm:px-8 sm:pt-32 sm:pb-28">
+    <section className="min-h-screen flex flex-col items-center justify-center hero-section">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="text-center max-w-3xl mx-auto mb-16 sm:mb-24"
+        className="text-center max-w-3xl mx-auto mb-10 container"
       >
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[var(--text-primary)] mb-5 tracking-tight">
+        <h1 className="font-extrabold tracking-tight text-[var(--text-primary)]" style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', lineHeight: 1.06 }}>
           Personal Career Navigator
         </h1>
-        <p className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-xl mx-auto leading-relaxed" style={{ marginTop: '16px' }}>
+        <p className="mt-3 muted font-medium max-w-xl mx-auto" style={{ fontSize: '18px', marginTop: '12px' }}>
           Your AI-powered Career Co-Pilot
         </p>
       </motion.div>
@@ -39,19 +39,24 @@ export default function HeroSection({ onResumeUploaded }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="w-full max-w-2xl flex flex-col items-center gap-12 sm:gap-16"
+        className="w-full flex flex-col items-center container"
+        style={{ gap: '28px', marginTop: '28px' }}
       >
-        <ResumeUpload
-          onUploadComplete={handleUploadComplete}
-          githubUrl={githubUrl}
-          linkedinUrl={linkedinUrl}
-        />
-        <ProfileLinks
-          githubUrl={githubUrl}
-          linkedinUrl={linkedinUrl}
-          onGitHubChange={setGitHubUrl}
-          onLinkedInChange={setLinkedInUrl}
-        />
+        <div className="hero-card glass-card w-full max-w-3xl">
+          <ResumeUpload
+            onUploadComplete={handleUploadComplete}
+            githubUrl={githubUrl}
+            linkedinUrl={linkedinUrl}
+          />
+          <div className="mt-4">
+            <ProfileLinks
+              githubUrl={githubUrl}
+              linkedinUrl={linkedinUrl}
+              onGitHubChange={setGitHubUrl}
+              onLinkedInChange={setLinkedInUrl}
+            />
+          </div>
+        </div>
       </motion.div>
 
       {showAnalysisLoader && (
@@ -59,20 +64,20 @@ export default function HeroSection({ onResumeUploaded }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="rounded-2xl p-10 sm:p-12 glass-card shadow-2xl flex flex-col items-center gap-6"
+            className="rounded-3xl p-10 sm:p-12 bg-[#F8F5F2] shadow-[0_8px_40px_rgba(0,0,0,0.12)] flex flex-col items-center gap-6"
           >
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-              className="w-16 h-16 rounded-full border-4 border-[var(--accent)]/30 border-t-[var(--accent)]"
+              className="w-16 h-16 rounded-full border-4 border-[#F97316]/30 border-t-[#F97316]"
             />
-            <p className="text-[var(--text-primary)] font-semibold">AI analyzing your profile...</p>
-            <p className="text-[var(--text-secondary)] text-sm">Identifying skills and gaps</p>
+            <p className="text-[#1E293B] font-semibold">AI analyzing your profile...</p>
+            <p className="text-[#64748B] text-sm">Identifying skills and gaps</p>
           </motion.div>
         </motion.div>
       )}
